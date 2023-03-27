@@ -26,11 +26,12 @@ if __name__ == '__main__':
         "features": []
     }
     for record in data:
+        # insert map pins for each airport
         output['features'].append({
             "type": "Feature",
             "geometry": {
                 "type": "Point",
-                "coordinates": [float(record['latitude_deg']), float(record['longitude_deg'])]
+                "coordinates": [float(record['longitude_deg']), float(record['latitude_deg'])]
             },
             "properties": {
                 "name": record['name'],
@@ -39,6 +40,7 @@ if __name__ == '__main__':
                 "iata_code": record['iata_code'],
                 "elevation": record['elevation_ft'],
                 "gps_code": record['gps_code'],
+                "marker-color": "#7e7e7e" if record['type'] == 'medium_airport' else "#ff0000",
             }
         })
     with open(OUT_PATH, 'w') as outfile:
